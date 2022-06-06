@@ -19,7 +19,7 @@ const config = getConfig();
 
 const providerConfig = {
   domain: "idstg.mcafee.com",
-  clientId: "gWr7RWzwo7AlVTt9yiWm1Vlnub9vCWFf",
+  clientId: "551WKDzrkor3WDbXAsH04cxpx6oUMSmT",
   ...(config.audience ? { audience: config.audience } : null),
   redirectUri: window.location.origin,
   onRedirectCallback,
