@@ -31,11 +31,23 @@ const NavBar = () => {
   const Culture = () => {
     const parsedHash = new URLSearchParams(window.location.hash.substr(1));
     let culture = query.get("culture") ?? parsedHash.get("culture");
-
     return culture;
   };
+  const Back = () => {
+    const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+    let back = query.get("enableBack") ?? parsedHash.get("enableBack");
+    return back;
+  };
+  const Skip = () => {
+    const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+    let skip = query.get("enableSkip") ?? parsedHash.get("enableSkip");
+    return skip;
+  };
+  const [enableSkip, setEnableSkip] = useState(Skip() || undefined);
+  const [enableBack, setEnableBack] = useState(Back() || undefined);
   const [culture, setCulture] = useState(Culture() || "en-us");
-  console.log("-------->", setCulture);
+
+  console.log("-------->", setCulture, setEnableSkip, setEnableBack);
   const AffId = () => {
     const parsedHash = new URLSearchParams(window.location.hash.substr(1));
     let culture = query.get("affid") ?? parsedHash.get("affid");
@@ -111,6 +123,8 @@ const NavBar = () => {
                         culture: culture,
                         affid: affid,
                         aai: JSON.stringify(aai),
+                        enableBack: enableBack,
+                        enableSkip: enableSkip,
                         // affid: AffId(),
                         // fragment: `culture=pl-pl&aff_id=105`,
                         // &aai=${JSON.stringify(
@@ -171,6 +185,8 @@ const NavBar = () => {
                       loginWithRedirect({
                         culture: Culture(),
                         affid: AffId(),
+                        // enableBack: enableBack(),
+                        // enableSkip: enableSkip(),
                       })
                     }
                   >
