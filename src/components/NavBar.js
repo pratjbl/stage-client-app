@@ -110,7 +110,7 @@ const NavBar = () => {
                       loginWithRedirect({
                         culture: culture,
                         affid: affid,
-                        aai: aai,
+                        aai: JSON.stringify(aai),
                         // affid: AffId(),
                         // fragment: `culture=pl-pl&aff_id=105`,
                         // &aai=${JSON.stringify(
