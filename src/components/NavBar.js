@@ -36,12 +36,12 @@ const NavBar = () => {
   const Back = () => {
     const parsedHash = new URLSearchParams(window.location.hash.substr(1));
     let back = query.get("enableBack") ?? parsedHash.get("enableBack");
-    return back;
+    return back === "true";
   };
   const Skip = () => {
     const parsedHash = new URLSearchParams(window.location.hash.substr(1));
     let skip = query.get("enableSkip") ?? parsedHash.get("enableSkip");
-    return skip;
+    return skip === "true";
   };
   const [enableSkip, setEnableSkip] = useState(Skip() || undefined);
   const [enableBack, setEnableBack] = useState(Back() || undefined);
