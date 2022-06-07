@@ -1,22 +1,22 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState } from 'react';
 
-import { useSelector, useDispatch } from "react-redux";
-import { addNewKeyValuePair } from "../feature/commonState";
-import logo from "../assets/Mcafee-Logo.svg";
+import { useSelector, useDispatch } from 'react-redux';
+import { addNewKeyValuePair } from '../feature/commonState';
+import logo from '../assets/Mcafee-Logo.svg';
 
 const Home = () => {
   const [togglePrefilEmail, setTogglePrefilEmail] = useState(false);
   const [disablePrefilEmailState, disablePrefilEmail] = useState(false);
   const [currentQuery, setCurrentQuery] = useState({
-    query: "",
-    value: "",
-    culture: "",
-    prefillEmail: "",
-    affid: "",
-    landing_screen: "login",
+    query: '',
+    value: '',
+    culture: '',
+    prefillEmail: '',
+    affid: '',
+    landing_screen: 'login',
     hideLoginCTA: false,
     hideSignUp: false,
-    ui_locales: "",
+    ui_locales: '',
     enableBack: false,
     enableSkip: false,
     hideHeader: false,
@@ -37,52 +37,52 @@ const Home = () => {
       ...currentQuery,
       landing_screen: e.target.value,
     });
-    dispatch(addNewKeyValuePair({ key: "mode", value: e.target.value }));
+    dispatch(addNewKeyValuePair({ key: 'mode', value: e.target.value }));
   };
 
   return (
     <Fragment>
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <div
           style={{
             fontWeight: 800,
-            marginBottom: "2rem",
+            marginBottom: '2rem',
           }}
         >
-          {" "}
+          {' '}
           <img
             className="app-logo"
             src={logo}
             alt="React logo"
             width="100px"
-          />{" "}
-          | QA
+          />{' '}
+          | STG
         </div>
 
         <div>
           {Object.keys(currentValue).length !== 0 && (
             <div
               style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#0B1634",
-                color: "white",
-                padding: "4rem",
-                marginBottom: "1rem",
-                borderRadius: "2rem",
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#0B1634',
+                color: 'white',
+                padding: '4rem',
+                marginBottom: '1rem',
+                borderRadius: '2rem',
                 boxShadow:
-                  "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                  '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
                 fontWeight: 600,
-                fontSize: "2rem",
+                fontSize: '2rem',
               }}
             >
               {Object.keys(currentValue).map((value, index) => {
@@ -100,8 +100,8 @@ const Home = () => {
             Land on Different Page
             <select
               style={{
-                marginLeft: "1rem",
-                marginBottom: "1rem",
+                marginLeft: '1rem',
+                marginBottom: '1rem',
               }}
               value={currentQuery.landing_screen}
               onChange={ChangeLanding}
@@ -111,23 +111,23 @@ const Home = () => {
               <option value="register">Signup Page</option>
             </select>
           </div>
-          {currentQuery?.landing_screen === "register" ? (
+          {currentQuery?.landing_screen === 'register' ? (
             <div
               style={{
-                display: "flex",
-                marginBottom: "1rem",
+                display: 'flex',
+                marginBottom: '1rem',
                 fontWeight: 700,
               }}
             >
-              Hide Login Redirection{" "}
+              Hide Login Redirection{' '}
               {currentQuery?.hideLoginCTA ? (
                 <button
                   style={{
-                    marginLeft: "1rem",
-                    borderRadius: "2rem",
-                    background: "#43CB2B",
-                    color: "white",
-                    border: "1px solid white",
+                    marginLeft: '1rem',
+                    borderRadius: '2rem',
+                    background: '#43CB2B',
+                    color: 'white',
+                    border: '1px solid white',
                   }}
                   onClick={(e) => {
                     setCurrentQuery({
@@ -135,7 +135,7 @@ const Home = () => {
                       hideLoginCTA: false,
                     });
                     dispatch(
-                      addNewKeyValuePair({ key: "hideLoginCTA", value: false })
+                      addNewKeyValuePair({ key: 'hideLoginCTA', value: false })
                     );
                   }}
                 >
@@ -144,9 +144,9 @@ const Home = () => {
               ) : (
                 <button
                   style={{
-                    marginLeft: "1rem",
-                    borderRadius: "2rem",
-                    border: "1px solid white",
+                    marginLeft: '1rem',
+                    borderRadius: '2rem',
+                    border: '1px solid white',
                   }}
                   onClick={(e) => {
                     setCurrentQuery({
@@ -154,7 +154,7 @@ const Home = () => {
                       hideLoginCTA: true,
                     });
                     dispatch(
-                      addNewKeyValuePair({ key: "hideLoginCTA", value: true })
+                      addNewKeyValuePair({ key: 'hideLoginCTA', value: true })
                     );
                   }}
                 >
@@ -165,20 +165,20 @@ const Home = () => {
           ) : (
             <div
               style={{
-                display: "flex",
-                marginBottom: "1rem",
+                display: 'flex',
+                marginBottom: '1rem',
                 fontWeight: 700,
               }}
             >
-              Hide Signup Redirection{" "}
+              Hide Signup Redirection{' '}
               {currentQuery?.hideSignUp ? (
                 <button
                   style={{
-                    marginLeft: "1rem",
-                    borderRadius: "2rem",
-                    background: "#43CB2B",
-                    color: "white",
-                    border: "1px solid white",
+                    marginLeft: '1rem',
+                    borderRadius: '2rem',
+                    background: '#43CB2B',
+                    color: 'white',
+                    border: '1px solid white',
                   }}
                   onClick={(e) => {
                     setCurrentQuery({
@@ -186,7 +186,7 @@ const Home = () => {
                       hideSignUp: false,
                     });
                     dispatch(
-                      addNewKeyValuePair({ key: "hideSignUp", value: false })
+                      addNewKeyValuePair({ key: 'hideSignUp', value: false })
                     );
                   }}
                 >
@@ -195,9 +195,9 @@ const Home = () => {
               ) : (
                 <button
                   style={{
-                    marginLeft: "1rem",
-                    borderRadius: "2rem",
-                    border: "1px solid white",
+                    marginLeft: '1rem',
+                    borderRadius: '2rem',
+                    border: '1px solid white',
                   }}
                   onClick={(e) => {
                     setCurrentQuery({
@@ -205,7 +205,7 @@ const Home = () => {
                       hideSignUp: true,
                     });
                     dispatch(
-                      addNewKeyValuePair({ key: "hideSignUp", value: true })
+                      addNewKeyValuePair({ key: 'hideSignUp', value: true })
                     );
                   }}
                 >
@@ -217,20 +217,20 @@ const Home = () => {
 
           <div
             style={{
-              display: "flex",
-              marginBottom: "1rem",
+              display: 'flex',
+              marginBottom: '1rem',
               fontWeight: 700,
             }}
           >
-            Pre-fill Email{" "}
+            Pre-fill Email{' '}
             {togglePrefilEmail ? (
               <button
                 style={{
-                  marginLeft: "1rem",
-                  borderRadius: "2rem",
-                  background: "#43CB2B",
-                  color: "white",
-                  border: "1px solid white",
+                  marginLeft: '1rem',
+                  borderRadius: '2rem',
+                  background: '#43CB2B',
+                  color: 'white',
+                  border: '1px solid white',
                 }}
                 onClick={() => {
                   setTogglePrefilEmail(false);
@@ -241,9 +241,9 @@ const Home = () => {
             ) : (
               <button
                 style={{
-                  marginLeft: "1rem",
-                  borderRadius: "2rem",
-                  border: "1px solid white",
+                  marginLeft: '1rem',
+                  borderRadius: '2rem',
+                  border: '1px solid white',
                 }}
                 onClick={() => {
                   setTogglePrefilEmail(true);
@@ -256,16 +256,16 @@ const Home = () => {
               <div
                 style={{
                   fontWeight: 700,
-                  marginLeft: "1rem",
+                  marginLeft: '1rem',
                 }}
               >
-                <label>Enter Valid Email</label>{" "}
+                <label>Enter Valid Email</label>{' '}
                 <input
                   type="text"
                   placeholder="abc@dispostable.com"
                   value={currentQuery.prefillEmail}
                   style={{
-                    marginLeft: "1rem",
+                    marginLeft: '1rem',
                   }}
                   onChange={(e) => {
                     setCurrentQuery({
@@ -275,7 +275,7 @@ const Home = () => {
                   }}
                   onBlur={(e) => {
                     dispatch(
-                      addNewKeyValuePair({ key: "ea", value: e.target.value })
+                      addNewKeyValuePair({ key: 'ea', value: e.target.value })
                     );
                   }}
                 />
@@ -285,23 +285,23 @@ const Home = () => {
           {togglePrefilEmail ? (
             <div
               style={{
-                margin: "1rem 0rem",
+                margin: '1rem 0rem',
                 fontWeight: 700,
               }}
             >
-              DisableEmail:{" "}
+              DisableEmail:{' '}
               {disablePrefilEmailState ? (
                 <button
                   style={{
-                    marginLeft: "1rem",
-                    borderRadius: "2rem",
-                    background: "#43CB2B",
-                    color: "white",
-                    border: "1px solid white",
+                    marginLeft: '1rem',
+                    borderRadius: '2rem',
+                    background: '#43CB2B',
+                    color: 'white',
+                    border: '1px solid white',
                   }}
                   onClick={() => {
                     dispatch(
-                      addNewKeyValuePair({ key: "disableEmail", value: false })
+                      addNewKeyValuePair({ key: 'disableEmail', value: false })
                     );
                     disablePrefilEmail(false);
                   }}
@@ -311,13 +311,13 @@ const Home = () => {
               ) : (
                 <button
                   style={{
-                    marginLeft: "1rem",
-                    borderRadius: "2rem",
-                    border: "1px solid white",
+                    marginLeft: '1rem',
+                    borderRadius: '2rem',
+                    border: '1px solid white',
                   }}
                   onClick={() => {
                     dispatch(
-                      addNewKeyValuePair({ key: "disableEmail", value: true })
+                      addNewKeyValuePair({ key: 'disableEmail', value: true })
                     );
                     disablePrefilEmail(true);
                   }}
@@ -329,17 +329,17 @@ const Home = () => {
           ) : null}
           <div
             style={{
-              marginBottom: "1rem",
+              marginBottom: '1rem',
               fontWeight: 700,
             }}
           >
-            Culture{" "}
+            Culture{' '}
             <input
               type="text"
               placeholder="Eg en-us"
               value={currentQuery.culture}
               style={{
-                marginLeft: "1rem",
+                marginLeft: '1rem',
               }}
               onChange={(e) => {
                 setCurrentQuery({
@@ -349,14 +349,14 @@ const Home = () => {
               }}
               onBlur={(e) => {
                 dispatch(
-                  addNewKeyValuePair({ key: "culture", value: e.target.value })
+                  addNewKeyValuePair({ key: 'culture', value: e.target.value })
                 );
               }}
             />
           </div>
           <div
             style={{
-              marginBottom: "1rem",
+              marginBottom: '1rem',
               fontWeight: 700,
             }}
           >
@@ -364,15 +364,15 @@ const Home = () => {
             {currentQuery?.enableBack ? (
               <button
                 style={{
-                  marginLeft: "1rem",
-                  borderRadius: "2rem",
-                  background: "#43CB2B",
-                  color: "white",
-                  border: "1px solid white",
+                  marginLeft: '1rem',
+                  borderRadius: '2rem',
+                  background: '#43CB2B',
+                  color: 'white',
+                  border: '1px solid white',
                 }}
                 onClick={() => {
                   dispatch(
-                    addNewKeyValuePair({ key: "enableBack", value: false })
+                    addNewKeyValuePair({ key: 'enableBack', value: false })
                   );
                   setCurrentQuery({ ...currentQuery, enableBack: false });
                 }}
@@ -382,13 +382,13 @@ const Home = () => {
             ) : (
               <button
                 style={{
-                  marginLeft: "1rem",
-                  borderRadius: "2rem",
-                  border: "1px solid white",
+                  marginLeft: '1rem',
+                  borderRadius: '2rem',
+                  border: '1px solid white',
                 }}
                 onClick={() => {
                   dispatch(
-                    addNewKeyValuePair({ key: "enableBack", value: true })
+                    addNewKeyValuePair({ key: 'enableBack', value: true })
                   );
                   setCurrentQuery({ ...currentQuery, enableBack: true });
                 }}
@@ -399,7 +399,7 @@ const Home = () => {
           </div>
           <div
             style={{
-              marginBottom: "1rem",
+              marginBottom: '1rem',
               fontWeight: 700,
             }}
           >
@@ -407,15 +407,15 @@ const Home = () => {
             {currentQuery?.enableSkip ? (
               <button
                 style={{
-                  marginLeft: "1rem",
-                  borderRadius: "2rem",
-                  background: "#43CB2B",
-                  color: "white",
-                  border: "1px solid white",
+                  marginLeft: '1rem',
+                  borderRadius: '2rem',
+                  background: '#43CB2B',
+                  color: 'white',
+                  border: '1px solid white',
                 }}
                 onClick={() => {
                   dispatch(
-                    addNewKeyValuePair({ key: "enableSkip", value: false })
+                    addNewKeyValuePair({ key: 'enableSkip', value: false })
                   );
                   setCurrentQuery({ ...currentQuery, enableSkip: false });
                 }}
@@ -425,13 +425,13 @@ const Home = () => {
             ) : (
               <button
                 style={{
-                  marginLeft: "1rem",
-                  borderRadius: "2rem",
-                  border: "1px solid white",
+                  marginLeft: '1rem',
+                  borderRadius: '2rem',
+                  border: '1px solid white',
                 }}
                 onClick={() => {
                   dispatch(
-                    addNewKeyValuePair({ key: "enableSkip", value: true })
+                    addNewKeyValuePair({ key: 'enableSkip', value: true })
                   );
                   setCurrentQuery({ ...currentQuery, enableSkip: true });
                 }}
@@ -442,7 +442,7 @@ const Home = () => {
           </div>
           <div
             style={{
-              marginBottom: "1rem",
+              marginBottom: '1rem',
               fontWeight: 700,
             }}
           >
@@ -450,15 +450,15 @@ const Home = () => {
             {currentQuery?.hideHeader ? (
               <button
                 style={{
-                  marginLeft: "1rem",
-                  borderRadius: "2rem",
-                  background: "#43CB2B",
-                  color: "white",
-                  border: "1px solid white",
+                  marginLeft: '1rem',
+                  borderRadius: '2rem',
+                  background: '#43CB2B',
+                  color: 'white',
+                  border: '1px solid white',
                 }}
                 onClick={() => {
                   dispatch(
-                    addNewKeyValuePair({ key: "hideHeader", value: false })
+                    addNewKeyValuePair({ key: 'hideHeader', value: false })
                   );
                   setCurrentQuery({ ...currentQuery, hideHeader: false });
                 }}
@@ -468,13 +468,13 @@ const Home = () => {
             ) : (
               <button
                 style={{
-                  marginLeft: "1rem",
-                  borderRadius: "2rem",
-                  border: "1px solid white",
+                  marginLeft: '1rem',
+                  borderRadius: '2rem',
+                  border: '1px solid white',
                 }}
                 onClick={() => {
                   dispatch(
-                    addNewKeyValuePair({ key: "hideHeader", value: true })
+                    addNewKeyValuePair({ key: 'hideHeader', value: true })
                   );
                   setCurrentQuery({ ...currentQuery, hideHeader: true });
                 }}
@@ -485,7 +485,7 @@ const Home = () => {
           </div>
           <div
             style={{
-              marginBottom: "1rem",
+              marginBottom: '1rem',
               fontWeight: 700,
             }}
           >
@@ -493,15 +493,15 @@ const Home = () => {
             {currentQuery?.hideFooter ? (
               <button
                 style={{
-                  marginLeft: "1rem",
-                  borderRadius: "2rem",
-                  background: "#43CB2B",
-                  color: "white",
-                  border: "1px solid white",
+                  marginLeft: '1rem',
+                  borderRadius: '2rem',
+                  background: '#43CB2B',
+                  color: 'white',
+                  border: '1px solid white',
                 }}
                 onClick={() => {
                   dispatch(
-                    addNewKeyValuePair({ key: "hideFooter", value: false })
+                    addNewKeyValuePair({ key: 'hideFooter', value: false })
                   );
                   setCurrentQuery({ ...currentQuery, hideFooter: false });
                 }}
@@ -511,13 +511,13 @@ const Home = () => {
             ) : (
               <button
                 style={{
-                  marginLeft: "1rem",
-                  borderRadius: "2rem",
-                  border: "1px solid white",
+                  marginLeft: '1rem',
+                  borderRadius: '2rem',
+                  border: '1px solid white',
                 }}
                 onClick={() => {
                   dispatch(
-                    addNewKeyValuePair({ key: "hideFooter", value: true })
+                    addNewKeyValuePair({ key: 'hideFooter', value: true })
                   );
                   setCurrentQuery({ ...currentQuery, hideFooter: true });
                 }}
@@ -528,17 +528,17 @@ const Home = () => {
           </div>
           <div
             style={{
-              marginBottom: "1rem",
+              marginBottom: '1rem',
               fontWeight: 700,
             }}
           >
-            Affid{" "}
+            Affid{' '}
             <input
               type="text"
               placeholder="1062 - For Dell"
               value={currentQuery.affid}
               style={{
-                marginLeft: "1rem",
+                marginLeft: '1rem',
               }}
               onChange={(e) => {
                 setCurrentQuery({
@@ -548,24 +548,24 @@ const Home = () => {
               }}
               onBlur={(e) => {
                 dispatch(
-                  addNewKeyValuePair({ key: "affid", value: e.target.value })
+                  addNewKeyValuePair({ key: 'affid', value: e.target.value })
                 );
               }}
             />
           </div>
           <div
             style={{
-              marginBottom: "1rem",
+              marginBottom: '1rem',
               fontWeight: 700,
             }}
           >
-            ui_locales{" "}
+            ui_locales{' '}
             <input
               type="text"
               placeholder="for eg en-us"
               value={currentQuery.ui_locales}
               style={{
-                marginLeft: "1rem",
+                marginLeft: '1rem',
               }}
               onChange={(e) => {
                 setCurrentQuery({
@@ -576,7 +576,7 @@ const Home = () => {
               onBlur={(e) => {
                 dispatch(
                   addNewKeyValuePair({
-                    key: "ui_locales",
+                    key: 'ui_locales',
                     value: e.target.value,
                   })
                 );
@@ -587,19 +587,19 @@ const Home = () => {
         <div
           style={{
             fontWeight: 700,
-            fontSize: "2rem",
-            margin: "2rem 0rem",
+            fontSize: '2rem',
+            margin: '2rem 0rem',
           }}
         >
           Add Some ExtraParam
         </div>
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            marginBottom: "1rem",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: '1rem',
             fontWeight: 700,
           }}
         >
@@ -626,12 +626,12 @@ const Home = () => {
             }}
           />
         </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <button
             style={{
-              backgroundColor: "#0065F9",
-              color: "white",
-              border: "none",
+              backgroundColor: '#0065F9',
+              color: 'white',
+              border: 'none',
             }}
             onClick={GetSomething}
           >
