@@ -21,6 +21,7 @@ import {
 } from "reactstrap";
 
 import { useAuth0 } from "@auth0/auth0-react";
+import { faUnderline } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
   function useQuery() {
@@ -43,11 +44,30 @@ const NavBar = () => {
     let skip = query.get("enableSkip") ?? parsedHash.get("enableSkip");
     return skip === "true";
   };
+  const setHeader = () => {
+    const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+    let header = query.get("hideHeader") ?? parsedHash.get("hideHeader");
+    return header === "true";
+  };
+  const setFooter = () => {
+    const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+    let footer = query.get("hideFooter") ?? parsedHash.get("hideFooter");
+    return footer === "true";
+  };
   const [enableSkip, setEnableSkip] = useState(Skip() || undefined);
   const [enableBack, setEnableBack] = useState(Back() || undefined);
+  const [hideHeader, setHideHeader] = useState(setHeader() || undefined);
+  const [hideFooter, setHideFooter] = useState(setFooter() || undefined);
   const [culture, setCulture] = useState(Culture() || "en-us");
 
-  console.log("-------->", setCulture, setEnableSkip, setEnableBack);
+  console.log(
+    "-------->",
+    setCulture,
+    setEnableSkip,
+    setEnableBack,
+    setHideHeader,
+    setHideFooter
+  );
   const AffId = () => {
     const parsedHash = new URLSearchParams(window.location.hash.substr(1));
     let culture = query.get("affid") ?? parsedHash.get("affid");
@@ -125,6 +145,8 @@ const NavBar = () => {
                         aai: JSON.stringify(aai),
                         enableBack: enableBack,
                         enableSkip: enableSkip,
+                        hideHeader: hideHeader,
+                        hideFooter: hideFooter,
                         // affid: AffId(),
                         // fragment: `culture=pl-pl&aff_id=105`,
                         // &aai=${JSON.stringify(
@@ -185,8 +207,10 @@ const NavBar = () => {
                       loginWithRedirect({
                         culture: Culture(),
                         affid: AffId(),
-                        // enableBack: enableBack(),
-                        // enableSkip: enableSkip(),
+                        enableBack: enableBack(),
+                        enableSkip: enableSkip(),
+                        hideHeader: setHeader(),
+                        hideFooter: setFooter(),
                       })
                     }
                   >
