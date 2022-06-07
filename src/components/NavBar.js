@@ -21,7 +21,6 @@ import {
 } from "reactstrap";
 
 import { useAuth0 } from "@auth0/auth0-react";
-import { faUnderline } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
   function useQuery() {
