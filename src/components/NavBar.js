@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink as RouterNavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { NavLink as RouterNavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from "react-redux";
 
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 import {
   Collapse,
@@ -19,9 +19,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-} from 'reactstrap';
+} from "reactstrap";
 
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const NavBar = () => {
   const currentValue = useSelector((state) => state.counter.value);
@@ -35,18 +35,18 @@ const NavBar = () => {
     const AffId = () => {
       let query = UseQuery();
       const parsedHash = new URLSearchParams(window.location.hash.substr(1));
-      let culture = query.get('affid') ?? parsedHash.get('affid');
+      let culture = query.get("affid") ?? parsedHash.get("affid");
       return culture;
     };
     const Culture = () => {
       let query = UseQuery();
       const parsedHash = new URLSearchParams(window.location.hash.substr(1));
-      let culture = query.get('culture') ?? parsedHash.get('culture');
+      let culture = query.get("culture") ?? parsedHash.get("culture");
 
       return culture;
     };
     setFinalState({
-      culture: currentValue?.culture || Culture() || '',
+      culture: currentValue?.culture || Culture() || "",
       affid: currentValue?.affid || AffId() || 0,
       enableBack: currentValue?.enableBack,
       enableSkip: currentValue?.enableSkip,
@@ -54,17 +54,17 @@ const NavBar = () => {
       hideFooter: currentValue?.hideFooter,
       ui_locales: currentValue?.ui_locales,
       aai: {
-        ea: currentValue?.ea || '',
+        ea: currentValue?.ea || "",
         cc: {
           Login:
-            currentValue?.mode !== 'register'
+            currentValue?.mode !== "register"
               ? {
                   hideSignUp: currentValue?.hideSignUp,
                   disableEmail: currentValue?.disableEmail,
                 }
               : null,
           SignUp:
-            currentValue?.mode === 'register'
+            currentValue?.mode === "register"
               ? {
                   hideLoginCTA: currentValue?.hideLoginCTA,
                   disableEmail: currentValue?.disableEmail,
@@ -75,7 +75,7 @@ const NavBar = () => {
       },
     });
   }, [currentValue, value]);
-  console.log('---->In the Navbar', finalState, currentValue);
+  console.log("---->In the Navbar", finalState, currentValue);
 
   const [isOpen, setIsOpen] = useState(false);
   const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
@@ -83,10 +83,9 @@ const NavBar = () => {
 
   const logoutWithRedirect = () =>
     logout({
-      returnTo: `${window.location.origin}`,
+      returnTo: window.location.origin,
     });
 
-  console.log(finalState.aai, '     aai------');
   return (
     <div className="nav-container">
       <Navbar color="light" light expand="md">
@@ -139,6 +138,8 @@ const NavBar = () => {
                       loginWithRedirect({
                         ...finalState,
                         aai: JSON.stringify(finalState.aai),
+                        source: "suhas-test",
+                        // connectionName: "AV-Migration-Pwd-Authentication",
                         // affid: AffId(),
                         // fragment: `culture=en-us&aff_id=105`,
                         // &aai=${JSON.stringify(

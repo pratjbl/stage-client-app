@@ -13,7 +13,7 @@ export function getConfig() {
       : null;
 
   return {
-    domain: "idstg.mcafee.com",
+    domain: configJson.domain,
     clientId: configJson.clientId,
     ...(audience ? { audience } : null),
   };

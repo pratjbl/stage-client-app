@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { Auth0Provider } from '@auth0/auth0-react';
-import history from './utils/history';
-import { getConfig } from './config';
-import { Provider } from 'react-redux';
-import store from './app/store';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import { Auth0Provider } from "@auth0/auth0-react";
+import history from "./utils/history";
+import { getConfig } from "./config";
+import { Provider } from "react-redux";
+import store from "./app/store";
 
 const onRedirectCallback = (appState) => {
   history.push(
@@ -20,21 +20,22 @@ const onRedirectCallback = (appState) => {
 const config = getConfig();
 
 const providerConfig = {
-  domain: "idstg.mcafee.com",
-  clientId: "551WKDzrkor3WDbXAsH04cxpx6oUMSmT",
-  ...(config.audience ? { audience: config.audience } : null),
+  domain: config.domain,
+  clientId: config.clientId,
   redirectUri: window.location.origin,
+  useRefreshTokens: true,
+  audience: "https://api.mcafee.com",
   onRedirectCallback,
-  cacheLocation: 'localstorage',
+  cacheLocation: "localstorage",
 };
 
 ReactDOM.render(
   <Provider store={store}>
-  <Auth0Provider {...providerConfig}>
-    <App />
+    <Auth0Provider {...providerConfig}>
+      <App />
     </Auth0Provider>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
