@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { NavLink as RouterNavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState, useEffect } from 'react';
+import { NavLink as RouterNavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux';
 
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 import {
   Collapse,
@@ -18,77 +19,74 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-} from "reactstrap";
+} from 'reactstrap';
 
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from '@auth0/auth0-react';
 
 const NavBar = () => {
-  function useQuery() {
-    console.log("in the hook ", useLocation().search);
-    return new URLSearchParams(useLocation().search);
-  }
-  let query = useQuery();
-  const Culture = () => {
-    const parsedHash = new URLSearchParams(window.location.hash.substr(1));
-    let culture = query.get("culture") ?? parsedHash.get("culture");
-    return culture;
-  };
-  const Back = () => {
-    const parsedHash = new URLSearchParams(window.location.hash.substr(1));
-    let back = query.get("enableBack") ?? parsedHash.get("enableBack");
-    return back === "true";
-  };
-  const Skip = () => {
-    const parsedHash = new URLSearchParams(window.location.hash.substr(1));
-    let skip = query.get("enableSkip") ?? parsedHash.get("enableSkip");
-    return skip === "true";
-  };
-  const setHeader = () => {
-    const parsedHash = new URLSearchParams(window.location.hash.substr(1));
-    let header = query.get("hideHeader") ?? parsedHash.get("hideHeader");
-    return header === "true";
-  };
-  const setFooter = () => {
-    const parsedHash = new URLSearchParams(window.location.hash.substr(1));
-    let footer = query.get("hideFooter") ?? parsedHash.get("hideFooter");
-    return footer === "true";
-  };
-  const [enableSkip, setEnableSkip] = useState(Skip() || undefined);
-  const [enableBack, setEnableBack] = useState(Back() || undefined);
-  const [hideHeader, setHideHeader] = useState(setHeader() || undefined);
-  const [hideFooter, setHideFooter] = useState(setFooter() || undefined);
-  const [culture, setCulture] = useState(Culture() || "en-us");
+  const currentValue = useSelector((state) => state.counter.value);
+  const value = useLocation().search;
 
-  console.log(
-    "-------->",
-    setCulture,
-    setEnableSkip,
-    setEnableBack,
-    setHideHeader,
-    setHideFooter
-  );
-  const AffId = () => {
-    const parsedHash = new URLSearchParams(window.location.hash.substr(1));
-    let culture = query.get("affid") ?? parsedHash.get("affid");
-    return culture;
-  };
-  const getAAI = () => {
-    const parsedHash = new URLSearchParams(window.location.hash.substr(1));
-    let culture = query.get("aai") ?? parsedHash.get("aai");
-    return culture;
-  };
-  const [aai, setAAI] = useState(getAAI() || {});
-  const [affid, setAffId] = useState(AffId() || "0");
-  console.log(setAffId, setAAI);
+  const [finalState, setFinalState] = useState({});
+  useEffect(() => {
+    function UseQuery() {
+      return new URLSearchParams(value);
+    }
+    const AffId = () => {
+      let query = UseQuery();
+      const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+      let culture = query.get('affid') ?? parsedHash.get('affid');
+      return culture;
+    };
+    const Culture = () => {
+      let query = UseQuery();
+      const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+      let culture = query.get('culture') ?? parsedHash.get('culture');
+
+      return culture;
+    };
+    setFinalState({
+      culture: currentValue?.culture || Culture() || '',
+      affid: currentValue?.affid || AffId() || 0,
+      enableBack: currentValue?.enableBack,
+      enableSkip: currentValue?.enableSkip,
+      hideHeader: currentValue?.hideHeader,
+      hideFooter: currentValue?.hideFooter,
+      ui_locales: currentValue?.ui_locales,
+      aai: {
+        ea: currentValue?.ea || '',
+        cc: {
+          Login:
+            currentValue?.mode !== 'register'
+              ? {
+                  hideSignUp: currentValue?.hideSignUp,
+                  disableEmail: currentValue?.disableEmail,
+                }
+              : null,
+          SignUp:
+            currentValue?.mode === 'register'
+              ? {
+                  hideLoginCTA: currentValue?.hideLoginCTA,
+                  disableEmail: currentValue?.disableEmail,
+                }
+              : null,
+          mode: currentValue?.mode,
+        },
+      },
+    });
+  }, [currentValue, value]);
+  console.log('---->In the Navbar', finalState, currentValue);
+
   const [isOpen, setIsOpen] = useState(false);
   const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const toggle = () => setIsOpen(!isOpen);
 
   const logoutWithRedirect = () =>
     logout({
-      returnTo: window.location.origin,
+      returnTo: `${window.location.origin}`,
     });
 
+  console.log(finalState.aai, '     aai------');
   return (
     <div className="nav-container">
       <Navbar color="light" light expand="md">
@@ -139,15 +137,10 @@ const NavBar = () => {
                     className="btn-margin"
                     onClick={() =>
                       loginWithRedirect({
-                        culture: culture,
-                        affid: affid,
-                        aai: JSON.stringify(aai),
-                        enableBack: enableBack,
-                        enableSkip: enableSkip,
-                        hideHeader: hideHeader,
-                        hideFooter: hideFooter,
+                        ...finalState,
+                        aai: JSON.stringify(finalState.aai),
                         // affid: AffId(),
-                        // fragment: `culture=pl-pl&aff_id=105`,
+                        // fragment: `culture=en-us&aff_id=105`,
                         // &aai=${JSON.stringify(
                         //   {
                         //     ea: "value",
@@ -204,12 +197,8 @@ const NavBar = () => {
                     block
                     onClick={() =>
                       loginWithRedirect({
-                        culture: Culture(),
-                        affid: AffId(),
-                        enableBack: enableBack(),
-                        enableSkip: enableSkip(),
-                        hideHeader: setHeader(),
-                        hideFooter: setFooter(),
+                        ...finalState,
+                        aai: JSON.stringify(finalState.aai),
                       })
                     }
                   >
