@@ -25,11 +25,8 @@ const providerConfig = {
   ...(config.audience ? { audience: config.audience } : null),
   redirectUri: window.location.origin,
   scope:
-    "openid profile email enroll read:authenticators remove:authenticators",
+    "openid profile email enroll read:authenticators remove:authenticators offline_access",
   onRedirectCallback,
-  useRefreshTokens: true,
-  audience: "https://api.mcafee.com",
-  cacheLocation: "localstorage",
 };
 
 let customHeader = "";
