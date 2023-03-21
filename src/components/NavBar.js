@@ -163,9 +163,8 @@ const NavBar = (props) => {
                     id="qsLoginBtn"
                     color="primary"
                     className="btn-margin"
-                    onClick={
-                      (() =>
-                        localStorage.setItem("culture", finalState?.culture),
+                    onClick={() => {
+                      localStorage.setItem("culture", finalState?.culture);
                       loginWithRedirect({
                         ...finalState,
                         aai: JSON.stringify(finalState.aai),
@@ -182,8 +181,8 @@ const NavBar = (props) => {
                         // appState: {
                         //   returnTo: "?culture=en-gb&aff_id=105",
                         // },
-                      }))
-                    }
+                      });
+                    }}
                   >
                     Log in
                   </Button>
@@ -227,14 +226,13 @@ const NavBar = (props) => {
                     id="qsLoginBtn"
                     color="primary"
                     block
-                    onClick={
-                      (() =>
-                        localStorage.setItem("culture", finalState?.culture),
+                    onClick={() => {
+                      localStorage.setItem("culture", finalState?.culture);
                       loginWithRedirect({
                         ...finalState,
                         aai: JSON.stringify(finalState.aai),
-                      }))
-                    }
+                      });
+                    }}
                   >
                     Log in
                   </Button>
