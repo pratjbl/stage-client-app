@@ -46,7 +46,6 @@ const NavBar = (props) => {
     function UseQuery() {
       return new URLSearchParams(value);
     }
-
     const AffId = () => {
       let query = UseQuery();
       const parsedHash = new URLSearchParams(window.location.hash.substr(1));
@@ -64,37 +63,45 @@ const NavBar = (props) => {
       culture: currentValue?.culture || Culture() || "",
       affid: currentValue?.affid || AffId() || 0,
       enableBack: currentValue?.enableBack,
+      devicerefid: "example-devicerefid",
       enableSkip: currentValue?.enableSkip,
       hideHeader: currentValue?.hideHeader,
       hideFooter: currentValue?.hideFooter,
       ui_locales: currentValue?.ui_locales,
-      devicerefid: currentValue?.deviceRefId,
       aai: {
         ea: currentValue?.ea || "",
         cc: {
-          Login:
-            currentValue?.mode !== "register"
-              ? {
-                  hideSignUp: currentValue?.hideSignUp,
-                  disableEmail: currentValue?.disableEmail,
-                }
-              : null,
-          SignUp:
-            currentValue?.mode === "register"
-              ? {
-                  hideLoginCTA: currentValue?.hideLoginCTA,
-                  disableEmail: currentValue?.disableEmail,
-                }
-              : null,
+          Login: {
+            hideLoginCTA: currentValue?.hideLoginCTAfromOTP,
+            hideResetPwdLink: currentValue?.hideResetPwdLink,
+            hideSignUp:
+              currentValue?.mode !== "register"
+                ? currentValue?.hideSignUp
+                : null,
+            disableEmail:
+              currentValue?.mode !== "register"
+                ? currentValue?.disableEmail
+                : null,
+            hideGoogleButton: currentValue?.hideGoogleLogin,
+          },
+          SignUp: {
+            hideGoogleButton: currentValue?.hideGoogleSignUp,
+            hideLoginCTA:
+              currentValue?.mode === "register"
+                ? currentValue?.hideLoginCTA
+                : null,
+            disableEmail:
+              currentValue?.mode === "register"
+                ? currentValue?.disableEmail
+                : null,
+          },
           mode: currentValue?.mode,
         },
       },
     });
-  }, [currentValue, value]);
-  useEffect(() => {
     getAccessToken();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentValue, value]);
   console.log("---->In the Navbar", finalState, currentValue);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -192,14 +199,14 @@ const NavBar = (props) => {
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret id="profileDropDown">
                     <img
-                      src={user.picture}
+                      src={user?.picture}
                       alt="Profile"
                       className="nav-user-profile rounded-circle"
                       width="50"
                     />
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem header>{user.name}</DropdownItem>
+                    <DropdownItem header>{user?.name}</DropdownItem>
                     <DropdownItem
                       tag={RouterNavLink}
                       to="/profile"
@@ -248,12 +255,12 @@ const NavBar = (props) => {
                 <NavItem>
                   <span className="user-info">
                     <img
-                      src={user.picture}
+                      src={user?.picture}
                       alt="Profile"
                       className="nav-user-profile d-inline-block rounded-circle mr-3"
                       width="50"
                     />
-                    <h6 className="d-inline-block">{user.name}</h6>
+                    <h6 className="d-inline-block">{user?.name}</h6>
                   </span>
                 </NavItem>
                 <NavItem>

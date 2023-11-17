@@ -21,7 +21,11 @@ const Home = () => {
     enableSkip: false,
     hideHeader: false,
     hideFooter: false,
+    hideGoogleLogin: false,
+    hideGoogleSignUp: false,
     deviceRefId: "",
+    hideLoginCTAfromOTP: false,
+    hideResetPwdLink: false,
   });
 
   const currentValue = useSelector((state) => state.counter.value);
@@ -215,7 +219,221 @@ const Home = () => {
               )}
             </div>
           )}
-
+          <div
+            style={{
+              display: "flex",
+              marginBottom: "1rem",
+              fontWeight: 700,
+            }}
+          >
+            Hide Login Redirection from OTP{" "}
+            {currentQuery?.hideLoginCTAfromOTP ? (
+              <button
+                style={{
+                  marginLeft: "1rem",
+                  borderRadius: "2rem",
+                  background: "#43CB2B",
+                  color: "white",
+                  border: "1px solid white",
+                }}
+                onClick={(e) => {
+                  setCurrentQuery({
+                    ...currentQuery,
+                    hideLoginCTAfromOTP: false,
+                  });
+                  dispatch(
+                    addNewKeyValuePair({
+                      key: "hideLoginCTAfromOTP",
+                      value: false,
+                    })
+                  );
+                }}
+              >
+                Yes
+              </button>
+            ) : (
+              <button
+                style={{
+                  marginLeft: "1rem",
+                  borderRadius: "2rem",
+                  border: "1px solid white",
+                }}
+                onClick={(e) => {
+                  setCurrentQuery({
+                    ...currentQuery,
+                    hideLoginCTAfromOTP: true,
+                  });
+                  dispatch(
+                    addNewKeyValuePair({
+                      key: "hideLoginCTAfromOTP",
+                      value: true,
+                    })
+                  );
+                }}
+              >
+                No
+              </button>
+            )}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              marginBottom: "1rem",
+              fontWeight: 700,
+            }}
+          >
+            Hide Reset Password link{" "}
+            {currentQuery?.hideResetPwdLink ? (
+              <button
+                style={{
+                  marginLeft: "1rem",
+                  borderRadius: "2rem",
+                  background: "#43CB2B",
+                  color: "white",
+                  border: "1px solid white",
+                }}
+                onClick={(e) => {
+                  setCurrentQuery({
+                    ...currentQuery,
+                    hideResetPwdLink: false,
+                  });
+                  dispatch(
+                    addNewKeyValuePair({
+                      key: "hideResetPwdLink",
+                      value: false,
+                    })
+                  );
+                }}
+              >
+                Yes
+              </button>
+            ) : (
+              <button
+                style={{
+                  marginLeft: "1rem",
+                  borderRadius: "2rem",
+                  border: "1px solid white",
+                }}
+                onClick={(e) => {
+                  setCurrentQuery({
+                    ...currentQuery,
+                    hideResetPwdLink: true,
+                  });
+                  dispatch(
+                    addNewKeyValuePair({
+                      key: "hideResetPwdLink",
+                      value: true,
+                    })
+                  );
+                }}
+              >
+                No
+              </button>
+            )}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              marginBottom: "1rem",
+              fontWeight: 700,
+            }}
+          >
+            Hide Google Login Button{" "}
+            {currentQuery?.hideGoogleLogin ? (
+              <button
+                style={{
+                  marginLeft: "1rem",
+                  borderRadius: "2rem",
+                  background: "#43CB2B",
+                  color: "white",
+                  border: "1px solid white",
+                }}
+                onClick={(e) => {
+                  setCurrentQuery({
+                    ...currentQuery,
+                    hideGoogleLogin: false,
+                  });
+                  dispatch(
+                    addNewKeyValuePair({ key: "hideGoogleLogin", value: false })
+                  );
+                }}
+              >
+                Yes
+              </button>
+            ) : (
+              <button
+                style={{
+                  marginLeft: "1rem",
+                  borderRadius: "2rem",
+                  border: "1px solid white",
+                }}
+                onClick={(e) => {
+                  setCurrentQuery({
+                    ...currentQuery,
+                    hideGoogleLogin: true,
+                  });
+                  dispatch(
+                    addNewKeyValuePair({ key: "hideGoogleLogin", value: true })
+                  );
+                }}
+              >
+                No
+              </button>
+            )}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              marginBottom: "1rem",
+              fontWeight: 700,
+            }}
+          >
+            Hide Google Signup Button{" "}
+            {currentQuery?.hideGoogleSignUp ? (
+              <button
+                style={{
+                  marginLeft: "1rem",
+                  borderRadius: "2rem",
+                  background: "#43CB2B",
+                  color: "white",
+                  border: "1px solid white",
+                }}
+                onClick={(e) => {
+                  setCurrentQuery({
+                    ...currentQuery,
+                    hideGoogleSignUp: false,
+                  });
+                  dispatch(
+                    addNewKeyValuePair({
+                      key: "hideGoogleSignUp",
+                      value: false,
+                    })
+                  );
+                }}
+              >
+                Yes
+              </button>
+            ) : (
+              <button
+                style={{
+                  marginLeft: "1rem",
+                  borderRadius: "2rem",
+                  border: "1px solid white",
+                }}
+                onClick={(e) => {
+                  setCurrentQuery({
+                    ...currentQuery,
+                    hideGoogleSignUp: true,
+                  });
+                  dispatch(
+                    addNewKeyValuePair({ key: "hideGoogleSignUp", value: true })
+                  );
+                }}
+              >
+                No
+              </button>
+            )}
+          </div>
           <div
             style={{
               display: "flex",
