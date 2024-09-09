@@ -70,6 +70,7 @@ const NavBar = (props) => {
       ui_locales: currentValue?.ui_locales,
       aai: {
         ea: currentValue?.ea || "",
+        action: currentValue?.action,
         cc: {
           Login: {
             hideLoginCTA: currentValue?.hideLoginCTAfromOTP,

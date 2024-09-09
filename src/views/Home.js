@@ -28,6 +28,7 @@ const Home = () => {
     hideResetPwdLink: false,
     soes: false,
     ssp: false,
+    action:""
   });
 
   const currentValue = useSelector((state) => state.counter.value);
@@ -46,7 +47,13 @@ const Home = () => {
     });
     dispatch(addNewKeyValuePair({ key: "mode", value: e.target.value }));
   };
-
+  const ChangeAction = (e) => {
+    setCurrentQuery({
+      ...currentQuery,
+      action: e.target.value,
+    });
+    dispatch(addNewKeyValuePair({ key: "action", value: e.target.value }));
+  };
   return (
     <Fragment>
       <div
@@ -116,6 +123,20 @@ const Home = () => {
               <option value="login">LoginPage Page(Default)</option>
               <option value="login_otp">OTP LoginPage Page</option>
               <option value="register">Signup Page</option>
+            </select>
+          </div>
+          <div style={{ fontWeight: 700 }}>
+            Action : 
+            <select
+              style={{
+                marginLeft: "1rem",
+                marginBottom: "1rem",
+              }}
+              value={currentQuery.action}
+              onChange={ChangeAction}
+            >
+              <option value="Default">Default</option>
+              <option value="force_verification">Force Verification</option>
             </select>
           </div>
           {currentQuery?.landing_screen === "register" ? (
