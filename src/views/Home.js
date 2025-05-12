@@ -28,7 +28,9 @@ const Home = () => {
     hideResetPwdLink: false,
     soes: false,
     ssp: false,
-    action:""
+    action:"",
+    f2rt:"",
+    f2rs:"",
   });
 
   const currentValue = useSelector((state) => state.counter.value);
@@ -53,6 +55,13 @@ const Home = () => {
       action: e.target.value,
     });
     dispatch(addNewKeyValuePair({ key: "action", value: e.target.value }));
+  };
+  const Changef2rs = (e) => {
+    setCurrentQuery({
+      ...currentQuery,
+      f2rs: e.target.value,
+    });
+    dispatch(addNewKeyValuePair({ key: "f2rs", value: e.target.value }));
   };
   return (
     <Fragment>
@@ -137,6 +146,35 @@ const Home = () => {
             >
               <option value="Default">Default</option>
               <option value="force_verification">Force Verification</option>
+            </select>
+          </div>
+        <div style={{ fontWeight: 700 }}>
+          f2rs : 
+            <select
+              style={{
+                marginLeft: "1rem",
+                marginBottom: "1rem",
+              }}
+              value={currentQuery.f2rs}
+              onChange={Changef2rs}
+            >
+              <option value="">Default</option>
+              <option value="ADMIN">Admin</option>
+              <option value="ProductLoudRegistrationToReal">ProductLoudRegistrationToReal</option>
+              <option value="OneTimeCredential">OneTimeCredential</option>
+              <option value="mpc">mpc</option>
+              <option value="m1a">m1a</option>
+              <option value="wss">wss</option>
+              <option value="vds">vds</option>
+              <option value="wps">wps</option>
+              <option value="cmac">cmac</option>
+              <option value="m1ac">m1ac</option>
+              <option value="sb">sb</option>
+              <option value="wa">wa</option>
+              <option value="vzm1a">vzm1a</option>
+              <option value="tnmyaccount">tnmyaccount</option>
+              <option value="tnkeycard">tnkeycard</option>
+              <option value="sdk-vz">sdk-vz</option>
             </select>
           </div>
           {currentQuery?.landing_screen === "register" ? (
@@ -972,6 +1010,43 @@ const Home = () => {
             >
               {" (Example - 44a02402-1d8b-4e99-8c40-6bead9438cc8)"}
             </p>
+          </div>
+              <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginBottom: "1rem",
+            }}
+          >
+              <div
+              style={{
+                fontWeight: 700,
+              }}
+            >
+              f2rt{" "}
+              <input
+                type="text"
+                // placeholder="for eg en-us"
+                value={currentQuery.f2rt}
+                style={{
+                  marginLeft: "1rem",
+                }}
+                onChange={(e) => {
+                  setCurrentQuery({
+                    ...currentQuery,
+                    f2rt: e.target.value,
+                  });
+                }}
+                onBlur={(e) => {
+                  dispatch(
+                    addNewKeyValuePair({
+                      key: "f2rt",
+                      value: e.target.value,
+                    })
+                  );
+                }}
+              />
+            </div>
           </div>
         </div>
         <div
