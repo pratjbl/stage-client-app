@@ -88,7 +88,9 @@ const NavBar = (props) => {
                 : null,
             hideGoogleButton: currentValue?.hideGoogleLogin,
             ssp: currentValue?.ssp,
-            soes: currentValue?.soes
+            soes: currentValue?.soes,
+            enableMSA: currentValue?.enableMSALogin,
+            enableGoogle: currentValue?.enableGoogleLogin
           },
           SignUp: {
             hideGoogleButton: currentValue?.hideGoogleSignUp,
@@ -100,6 +102,8 @@ const NavBar = (props) => {
               currentValue?.mode === "register"
                 ? currentValue?.disableEmail
                 : null,
+            enableMSA: currentValue?.enableMSALogin,
+            enableGoogle: currentValue?.enableGoogleLogin,
           },
           mode: currentValue?.mode,
         },
